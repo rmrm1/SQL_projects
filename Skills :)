@@ -1,7 +1,7 @@
 CREATE TABLE skills (num INTEGER, title TEXT, reason TEXT);
 
 INSERT INTO skills (num INTEGER, title TEXT, reason TEXT);
-VALUES (1, 'Knowledge of C++ and Python', 'More familiar with C++ as I''m currently teaching myself Python');
+VALUES (1, 'Knowledge of Programming', 'More familiar with C++ as I''m currently teaching myself Python and Swift');
 
 INSERT INTO skills (num INTEGER, title TEXT, reason TEXT);
 VALUES (2, 'Teamplayer', 'I truly enjoy being around other people and working collaboratively because it''s always so much more fun and you constantly learn something new');
