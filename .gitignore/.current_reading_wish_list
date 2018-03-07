@@ -1,0 +1,34 @@
+CREATE TABLE books (id INTEGER, title TEXT, author TEXT, year INTEGER);
+
+INSERT INTO books (id, title, author, year)
+VALUES (1, 'Surely You''re Joking, Mr. Feynman!', 'Feynman, Richard', 1985);
+
+INSERT INTO books (id, title, author, year)
+VALUES (2, 'When Breath Becomes Air', 'Kalanithi, Paul', 2016);
+
+INSERT INTO books (id, title, author, year)
+VALUES (3, 'First, Do No Harm', 'Belkin, Lisa', 1993);
+
+INSERT INTO books (id, title, author, year)
+VALUES (4, 'Where She Went', 'Forman, Gayle', 2011);
+
+ALTER TABLE books ADD COLUMN
+reason_you_want_to_read TEXT;
+
+UPDATE books
+SET reason_you_want_to_read = 'Well, he''s been called the father of physics'
+WHERE id = 1;
+
+UPDATE books
+SET reason_you_want_to_read = 'You''ve waited all summer to read this, but someone had always taken it out before you'
+WHERE id = 2;
+
+UPDATE books
+SET reason_you_want_to_read = 'Medical ethics is the most difficult and trying field- in your opinion'
+WHERE id = 3;
+
+UPDATE books
+SET reason_you_want_to_read = 'Just a light fiction read'
+WHERE id = 4;
+
+SELECT * FROM books;
