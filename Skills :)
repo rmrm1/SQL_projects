@@ -1,1 +1,21 @@
+CREATE TABLE skills (id INTEGER, title TEXT, reason TEXT);
 
+INSERT INTO skills (id INTEGER, title TEXT, reason TEXT);
+VALUES (1, 'Knowledge of C++ and Python', 'More familiar with C++ as I''m currently teaching myself Python');
+
+INSERT INTO skills (id INTEGER, title TEXT, reason TEXT);
+VALUES (2, 'Teamplayer', 'I truly enjoy being around other people and working collaboratively because it''s always so much more fun and you constantly learn something new');
+
+INSERT INTO skills (id INTEGER, title TEXT, reason TEXT);
+VALUES (3, 'Daydreamer', 'Despite it''s negative connatation at times, daydreaming makes me think about a more progressive and bright future, solutions to current problems, and different options I can possibly go through with or have in handy');
+
+INSERT INTO skills (id INTEGER, title TEXT, reason TEXT);
+VALUES (4, 'Considerate', 'Being considerate always has my conscience with me before or when I speak or act and thinking of consequences');
+
+INSERT INTO skills (id INTEGER, title TEXT, reason TEXT);
+VALUES (5, 'Curiosity in coding', 'Because of my curiousity, I''ve been able to find resources on my own to teach myself further with programming languages and seek out research opportunities');
+
+INSERT INTO skills (id INTEGER, title TEXT, reason TEXT);
+VALUES (6, 'Personal interest in politics', 'It''s allowed me to seek out cybersecurity as a concentration in my studies and make me more aware and cautious when working with computers'); 
+
+SELECT * FROM skills;
