@@ -1,0 +1,300 @@
+
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use min;
+Database changed
+MariaDB [min]> show tables;
+Empty set (0.00 sec)
+
+MariaDB [min]> create table Students
+    -> (sid integer,
+    -> fname char(20),
+    -> lname char(20),
+    -> login char(20),
+    -> dob date,
+    -> credits integer,
+    -> points real,
+    -> primary key (sid));
+Query OK, 0 rows affected (0.14 sec)
+
+MariaDB [min]> insert into Students
+    -> values
+    -> (53666, 'Jones', 'Brown', 'jbrown', '1994-3-21', 100, 340),
+    -> (53688, 'Smith', 'Walker', 'swalker', '1995-8-20',104,350),
+    -> (53999, 'Smith','Taylor', 'staylor', '1996-3-20',108, 346);
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [min]> select * from Students;
++-------+-------+--------+---------+------------+---------+--------+
+| sid   | fname | lname  | login   | dob        | credits | points |
++-------+-------+--------+---------+------------+---------+--------+
+| 53666 | Jones | Brown  | jbrown  | 1994-03-21 |     100 |    340 |
+| 53688 | Smith | Walker | swalker | 1995-08-20 |     104 |    350 |
+| 53999 | Smith | Taylor | staylor | 1996-03-20 |     108 |    346 |
++-------+-------+--------+---------+------------+---------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [min]> update Students
+    -> set credits=credits-4, points=points-16
+    -> where sid=53688;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [min]> select* from Students;
++-------+-------+--------+---------+------------+---------+--------+
+| sid   | fname | lname  | login   | dob        | credits | points |
++-------+-------+--------+---------+------------+---------+--------+
+| 53666 | Jones | Brown  | jbrown  | 1994-03-21 |     100 |    340 |
+| 53688 | Smith | Walker | swalker | 1995-08-20 |     100 |    334 |
+| 53999 | Smith | Taylor | staylor | 1996-03-20 |     108 |    346 |
++-------+-------+--------+---------+------------+---------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [min]> alter table Students
+    -> add status char(20);
+Query OK, 0 rows affected (0.18 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [min]> select * from Students;
++-------+-------+--------+---------+------------+---------+--------+--------+
+| sid   | fname | lname  | login   | dob        | credits | points | status |
++-------+-------+--------+---------+------------+---------+--------+--------+
+| 53666 | Jones | Brown  | jbrown  | 1994-03-21 |     100 |    340 | NULL   |
+| 53688 | Smith | Walker | swalker | 1995-08-20 |     100 |    334 | NULL   |
+| 53999 | Smith | Taylor | staylor | 1996-03-20 |     108 |    346 | NULL   |
++-------+-------+--------+---------+------------+---------+--------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [min]> update Students
+    -> set status = 'A'
+    -> where points>3.0;
+Query OK, 3 rows affected (0.05 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+MariaDB [min]> select * from Students;
++-------+-------+--------+---------+------------+---------+--------+--------+
+| sid   | fname | lname  | login   | dob        | credits | points | status |
++-------+-------+--------+---------+------------+---------+--------+--------+
+| 53666 | Jones | Brown  | jbrown  | 1994-03-21 |     100 |    340 | A      |
+| 53688 | Smith | Walker | swalker | 1995-08-20 |     100 |    334 | A      |
+| 53999 | Smith | Taylor | staylor | 1996-03-20 |     108 |    346 | A      |
++-------+-------+--------+---------+------------+---------+--------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [min]> delete from Students where fname = 'Smith';
+Query OK, 2 rows affected (0.01 sec)
+
+MariaDB [min]> select * from Students
+    -> ;
++-------+-------+-------+--------+------------+---------+--------+--------+
+| sid   | fname | lname | login  | dob        | credits | points | status |
++-------+-------+-------+--------+------------+---------+--------+--------+
+| 53666 | Jones | Brown | jbrown | 1994-03-21 |     100 |    340 | A      |
++-------+-------+-------+--------+------------+---------+--------+--------+
+1 row in set (0.00 sec)
+
+MariaDB [min]> insert into Students
+    -> values
+    -> (53688, 'Smith', 'Walker', 'swalker', '1995-8-20',104,350, 'A');
+Query OK, 1 row affected (0.02 sec)
+
+MariaDB [min]> insert into Students
+    -> values
+    -> (53999, 'Smith','Taylor', 'staylor', '1996-3-20',108, 346, 'A');
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [min]> select * from Students;
++-------+-------+--------+---------+------------+---------+--------+--------+
+| sid   | fname | lname  | login   | dob        | credits | points | status |
++-------+-------+--------+---------+------------+---------+--------+--------+
+| 53666 | Jones | Brown  | jbrown  | 1994-03-21 |     100 |    340 | A      |
+| 53688 | Smith | Walker | swalker | 1995-08-20 |     104 |    350 | A      |
+| 53999 | Smith | Taylor | staylor | 1996-03-20 |     108 |    346 | A      |
++-------+-------+--------+---------+------------+---------+--------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [min]> describe Students;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| sid     | int(11)  | NO   | PRI | NULL    |       |
+| fname   | char(20) | YES  |     | NULL    |       |
+| lname   | char(20) | YES  |     | NULL    |       |
+| login   | char(20) | YES  |     | NULL    |       |
+| dob     | date     | YES  |     | NULL    |       |
+| credits | int(11)  | YES  |     | NULL    |       |
+| points  | double   | YES  |     | NULL    |       |
+| status  | char(20) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+MariaDB [min]> create table Sessions
+    -> (call_num integer,
+    -> course_num char(20),
+    -> course_title char(40),
+    -> credits integer,
+    -> term char(20),
+    -> year integer,
+    -> instructor_id integer,
+    -> primary key (call_num));
+Query OK, 0 rows affected (0.07 sec)
+
+MariaDB [min]> select * from Sessions;
+Empty set (0.00 sec)
+
+MariaDB [min]> insert into Sessions
+    -> values
+    -> (11121, 'CS1100', 'Foundation of CS', 4, 'Spring', 2014, 222),
+    -> (11122, 'CS1400', 'Discrete Structures', 4, 'Spring', 2014, 223),
+    -> (11222, 'CS1600', 'Computer Science I', 4, 'Spring', 2014, 200);
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [min]> select * from Sessions;
++----------+------------+---------------------+---------+--------+------+---------------+
+| call_num | course_num | course_title        | credits | term   | year | instructor_id |
++----------+------------+---------------------+---------+--------+------+---------------+
+|    11121 | CS1100     | Foundation of CS    |       4 | Spring | 2014 |           222 |
+|    11122 | CS1400     | Discrete Structures |       4 | Spring | 2014 |           223 |
+|    11222 | CS1600     | Computer Science I  |       4 | Spring | 2014 |           200 |
++----------+------------+---------------------+---------+--------+------+---------------+
+3 rows in set (0.00 sec)
+
+MariaDB [min]> describe Sessions;
++---------------+----------+------+-----+---------+-------+
+| Field         | Type     | Null | Key | Default | Extra |
++---------------+----------+------+-----+---------+-------+
+| call_num      | int(11)  | NO   | PRI | NULL    |       |
+| course_num    | char(20) | YES  |     | NULL    |       |
+| course_title  | char(40) | YES  |     | NULL    |       |
+| credits       | int(11)  | YES  |     | NULL    |       |
+| term          | char(20) | YES  |     | NULL    |       |
+| year          | int(11)  | YES  |     | NULL    |       |
+| instructor_id | int(11)  | YES  |     | NULL    |       |
++---------------+----------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+MariaDB [min]> create table Enrolled
+    -> (sid integer,
+    -> call_num integer,
+    -> grade char (5),
+    -> PRIMARY KEY (sid, call_num),
+    -> FOREIGN KEY (sid) REFERENCES Students (sid)
+    ->           ON DELETE CASCADE
+    ->           ON UPDATE NO ACTION,
+    -> FOREIGN KEY (call_num) REFERENCES Sessions (call_num)
+    ->           ON DELETE CASCADE
+    ->           ON UPDATE NO ACTION);
+Query OK, 0 rows affected (0.14 sec)
+
+MariaDB [min]> select * from Enrolled;
+Empty set (0.00 sec)
+
+MariaDB [min]> describe Enrolled
+    -> ;
++----------+---------+------+-----+---------+-------+
+| Field    | Type    | Null | Key | Default | Extra |
++----------+---------+------+-----+---------+-------+
+| sid      | int(11) | NO   | PRI | NULL    |       |
+| call_num | int(11) | NO   | PRI | NULL    |       |
+| grade    | char(5) | YES  |     | NULL    |       |
++----------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+MariaDB [min]> insert into Enrolled
+    -> values
+    -> (53666, 11121, 'A'),
+    -> (53688, 11121, 'B'),
+    -> (53999, 11122, 'A'),
+    -> (53999, 11222, 'C');
+Query OK, 4 rows affected (0.04 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [min]> select * from Enrolled;
++-------+----------+-------+
+| sid   | call_num | grade |
++-------+----------+-------+
+| 53666 |    11121 | A     |
+| 53688 |    11121 | B     |
+| 53999 |    11122 | A     |
+| 53999 |    11222 | C     |
++-------+----------+-------+
+4 rows in set (0.00 sec)
+
+MariaDB [min]> delete from Students where sid=53666;
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [min]> select * from Students;
++-------+-------+--------+---------+------------+---------+--------+--------+
+| sid   | fname | lname  | login   | dob        | credits | points | status |
++-------+-------+--------+---------+------------+---------+--------+--------+
+| 53688 | Smith | Walker | swalker | 1995-08-20 |     104 |    350 | A      |
+| 53999 | Smith | Taylor | staylor | 1996-03-20 |     108 |    346 | A      |
++-------+-------+--------+---------+------------+---------+--------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [min]> select * from Enrolled;
++-------+----------+-------+
+| sid   | call_num | grade |
++-------+----------+-------+
+| 53688 |    11121 | B     |
+| 53999 |    11122 | A     |
+| 53999 |    11222 | C     |
++-------+----------+-------+
+3 rows in set (0.01 sec)
+
+MariaDB [min]> delete from Sessions where call_num= 11222;
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [min]> select * from Sessions;
++----------+------------+---------------------+---------+--------+------+---------------+
+| call_num | course_num | course_title        | credits | term   | year | instructor_id |
++----------+------------+---------------------+---------+--------+------+---------------+
+|    11121 | CS1100     | Foundation of CS    |       4 | Spring | 2014 |           222 |
+|    11122 | CS1400     | Discrete Structures |       4 | Spring | 2014 |           223 |
++----------+------------+---------------------+---------+--------+------+---------------+
+2 rows in set (0.00 sec)
+
+MariaDB [min]> select * from Enrolled;
++-------+----------+-------+
+| sid   | call_num | grade |
++-------+----------+-------+
+| 53688 |    11121 | B     |
+| 53999 |    11122 | A     |
++-------+----------+-------+
+2 rows in set (0.00 sec)
+
+MariaDB [min]> update Students
+    -> set sid=53687
+    -> where sid=53688;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`min`.`Enrolled`, CONSTRAINT `Enrolled_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `Students` (`sid`) ON DELETE CASCADE ON UPDATE NO ACTION)
+
+MariaDB [min]> select * from Students;
++-------+-------+--------+---------+------------+---------+--------+--------+
+| sid   | fname | lname  | login   | dob        | credits | points | status |
++-------+-------+--------+---------+------------+---------+--------+--------+
+| 53688 | Smith | Walker | swalker | 1995-08-20 |     104 |    350 | A      |
+| 53999 | Smith | Taylor | staylor | 1996-03-20 |     108 |    346 | A      |
++-------+-------+--------+---------+------------+---------+--------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [min]> update Sessions
+    -> set call_num = 11223
+    -> where call_num = 11121;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`min`.`Enrolled`, CONSTRAINT `Enrolled_ibfk_2` FOREIGN KEY (`call_num`) REFERENCES `Sessions` (`call_num`) ON DELETE CASCADE ON UPDATE NO ACTION)
+
+MariaDB [min]> select * from Sessions;
++----------+------------+---------------------+---------+--------+------+---------------+
+| call_num | course_num | course_title        | credits | term   | year | instructor_id |
++----------+------------+---------------------+---------+--------+------+---------------+
+|    11121 | CS1100     | Foundation of CS    |       4 | Spring | 2014 |           222 |
+|    11122 | CS1400     | Discrete Structures |       4 | Spring | 2014 |           223 |
++----------+------------+---------------------+---------+--------+------+---------------+
+2 rows in set (0.00 sec)
+
+MariaDB [min]> exit;
+Bye
