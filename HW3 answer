@@ -1,0 +1,58 @@
+/* Q1 */
+
+create table Countries (
+	name char(32),
+	primary key (name)
+);
+
+create table Olympics_Host (
+	year year,
+	season char(10),
+	name char(32) not null,
+	primary key (year, season),
+	foreign key (name) references Countries (name)
+);
+
+/* Q2 */
+
+create table Phone (
+	number char(12),
+	primary key (number)
+);
+
+create table Producers (
+	ssn char(11),
+	primary key (ssn)
+);
+
+create table Musicians(
+	ssn char(11),
+	name char(20),
+	address char(30),
+	primary key (ssn)
+);
+
+create table Have(
+	ssn char(11),
+	number char(12),
+	primary key (ssn, number),
+	foreign key (ssn) references Musicians (ssn),
+	foreign key (number) references Phone (number)
+);
+
+create table Albums_have (
+	title char(20),
+	year year,
+	ssn char(11) not null,
+	primary key (title, year),
+	foreign key (ssn) references Producers (ssn)
+);
+
+create table Recorded (
+	ssn char(11),
+	title char(20),
+	year year,
+	primary key (ssn, title, year),
+	foreign key (ssn) references Musicians (ssn),
+	foreign key (title, year) references Albums_have (title, year)
+);
